@@ -1,0 +1,27 @@
+Version:1.0
+Atlas
+AS7-D
+BattleMech
+
+Mass:100
+Walk MP:3
+Jump MP:0
+Heat Sinks:20
+
+Head Armor:9
+Center Torso Armor:47
+Left Torso Armor:32
+Right Torso Armor:32
+Left Arm Armor:34
+Right Arm Armor:34
+Left Leg Armor:41
+Right Leg Armor:41
+
+Weapons:7
+1 AC/20, Right Arm
+1 Medium Laser, Center Torso
+1 Medium Laser, Left Arm
+1 Medium Laser, Right Arm
+1 Medium Laser, Left Torso
+1 LRM 20, Left Torso
+1 SRM 6, Left Torso

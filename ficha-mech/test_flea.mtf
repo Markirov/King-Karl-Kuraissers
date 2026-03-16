@@ -1,0 +1,122 @@
+Version:1.0
+Flea
+FLE-4
+BattleMech
+
+Mass:20
+Walk MP:6
+Jump MP:0
+Heat Sinks:10
+
+Head Armor:6
+Center Torso Armor:8
+Left Torso Armor:5
+Right Torso Armor:5
+Left Arm Armor:4
+Right Arm Armor:4
+Left Leg Armor:4
+Right Leg Armor:4
+Center Torso Rear Armor:2
+Left Torso Rear Armor:2
+Right Torso Rear Armor:2
+
+Weapons:5
+1 Large Laser, Right Arm
+1 Small Laser, Left Arm
+1 Small Laser, Left Arm
+1 Small Laser, Right Arm
+1 Flamer, Center Torso
+
+Left Arm:
+Shoulder
+Upper Arm Actuator
+Lower Arm Actuator
+Small Laser
+Small Laser
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+
+Right Arm:
+Shoulder
+Upper Arm Actuator
+Lower Arm Actuator
+Large Laser
+Large Laser
+Small Laser
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+
+Left Torso:
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+
+Right Torso:
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+-Empty-
+
+Center Torso:
+Fusion Engine
+Fusion Engine
+Fusion Engine
+Gyro
+Gyro
+Gyro
+Gyro
+Fusion Engine
+Fusion Engine
+Fusion Engine
+Flamer
+-Empty-
+
+Head:
+Life Support
+Sensors
+Cockpit
+-Empty-
+Sensors
+Life Support
+
+Left Leg:
+Hip
+Upper Leg Actuator
+Lower Leg Actuator
+Foot Actuator
+-Empty-
+-Empty-
+
+Right Leg:
+Hip
+Upper Leg Actuator
+Lower Leg Actuator
+Foot Actuator
+-Empty-
+-Empty-
