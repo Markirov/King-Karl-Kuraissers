@@ -1,0 +1,58 @@
+{
+  "campaign": "ELH",
+  "decade": "2990",
+  "year": "8",
+  "nombre": "Dayfidd Guffrudd",
+  "jugador": "Marcos",
+  "mechMod": "-2",
+  "mechRoll": 14,
+  "str": "7",
+  "dex": "8",
+  "int": "8",
+  "cha": "6",
+  "origen": "Federación Soles",
+  "afiliacion": "Mercenario (Unidad Mercenaria)",
+  "estudios": "Tutores Nobles",
+  "nobleSkill": "Espada",
+  "ageRoll": "2",
+  "altura": "188 cm",
+  "peso": "99.0 kg",
+  "pelo": "Pelirrojo",
+  "sexo": "Hombre",
+  "ojos": "Grises",
+  "cbills": "",
+  "salary": "",
+  "xpTotal": "",
+  "xpAvail": "",
+  "xpBase": "",
+  "merits": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "demerits": [
+    "Enemigo poderoso",
+    "SDT",
+    "Ineptitud natural",
+    "Mala reputacion alta",
+    "",
+    ""
+  ],
+  "extraSkills": [
+    {
+      "name": "Arco",
+      "level": "1"
+    },
+    {
+      "name": "Rifle",
+      "level": "1"
+    },
+    {
+      "name": "",
+      "level": ""
+    }
+  ]
+}

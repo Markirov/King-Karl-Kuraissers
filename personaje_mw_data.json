@@ -1,0 +1,58 @@
+{
+  "campaign": "ELH",
+  "decade": "2990",
+  "year": "0",
+  "nombre": "",
+  "jugador": "",
+  "mechMod": "0",
+  "mechRoll": 0,
+  "str": "",
+  "dex": "",
+  "int": "",
+  "cha": "",
+  "origen": "",
+  "afiliacion": "Mercenario (Unidad Mercenaria)",
+  "estudios": "",
+  "nobleSkill": "",
+  "ageRoll": "",
+  "altura": "",
+  "peso": "",
+  "pelo": "",
+  "sexo": "",
+  "ojos": "",
+  "cbills": "",
+  "salary": "",
+  "xpTotal": "",
+  "xpAvail": "",
+  "xpBase": "",
+  "merits": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "demerits": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "extraSkills": [
+    {
+      "name": "",
+      "level": ""
+    },
+    {
+      "name": "",
+      "level": ""
+    },
+    {
+      "name": "",
+      "level": ""
+    }
+  ]
+}

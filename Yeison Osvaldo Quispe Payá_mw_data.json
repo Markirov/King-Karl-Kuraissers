@@ -1,0 +1,57 @@
+{
+  "campaign": "ELH",
+  "decade": "2990",
+  "year": "8",
+  "nombre": "Yeison Osvaldo Quispe Payá",
+  "jugador": "Jaime",
+  "mechMod": "-2",
+  "mechRoll": 12,
+  "str": "8",
+  "dex": "7",
+  "int": "8",
+  "cha": "6",
+  "origen": "Liga de Mundos Libres",
+  "afiliacion": "Mercenario (Unidad Mercenaria)",
+  "estudios": "Academia de Oficiales",
+  "nobleSkill": "",
+  "ageRoll": "5",
+  "altura": "167 cm",
+  "peso": "78.1 kg",
+  "pelo": "Negro",
+  "sexo": "Hombre",
+  "ojos": "Marrones",
+  "cbills": "",
+  "salary": "",
+  "xpTotal": "",
+  "xpAvail": "",
+  "merits": [
+    "Fuerte",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "demerits": [
+    "Deudas elevadas",
+    "Enemigo debil",
+    "Ineptitud natural",
+    "Repulsivo",
+    "",
+    ""
+  ],
+  "extraSkills": [
+    {
+      "name": "",
+      "level": ""
+    },
+    {
+      "name": "",
+      "level": ""
+    },
+    {
+      "name": "",
+      "level": ""
+    }
+  ]
+}
