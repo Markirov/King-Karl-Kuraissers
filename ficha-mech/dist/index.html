@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>BattleTech Record Sheet</title>
+    <meta name="description" content="Hoja de registro interactiva para BattleTech. Carga archivos .mtf, gestiona blindaje, calor, armas y munición.">
+  <script type="module" crossorigin src="/assets/index-BajuXlMH.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Ef3VewT1.css">
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <div class="header-controls">
+        <label for="mtf-upload" class="upload-btn">📂 CARGAR .MTF / .SSW</label>
+        <input type="file" id="mtf-upload" accept=".mtf, .ssw">
+        <span id="mech-info">Ningún Mech cargado</span>
+    </div>
+
+    <!-- ═══ MECH BANNER ═══ -->
+    <div class="mech-banner hidden" id="mech-banner">
+        <div>
+            <span class="mech-name" id="mech-name">---</span>
+            <span class="mech-variant" id="mech-variant"></span>
+        </div>
+        <div class="mech-status-checks">
+            <label><input type="checkbox" id="chk-shutdown"> APAGADO</label>
+            <label><input type="checkbox" id="chk-prone"> DERRUMBADO</label>
+        </div>
+    </div>
+
+    <!-- ═══ MAIN SHEET ═══ -->
+    <div class="sheet-grid hidden" id="app-container">
+
+        <!-- ══════════════════════════════════════════════
+             COLUMN 1  — Overview, Pilot, Weapons, Hit Table
+             ══════════════════════════════════════════════ -->
+        <div style="display:flex; flex-direction:column; gap:8px;">
+
+            <!-- Overview -->
+            <div class="panel">
+                <div class="panel-title">Resumen</div>
+                <div class="overview-grid" id="overview-grid"></div>
+                <div class="move-modifiers" id="move-modifiers"></div>
+            </div>
+
+            <!-- Pilot -->
+            <div class="panel">
+                <div class="panel-title orange">Piloto</div>
+                <div class="pilot-grid" id="pilot-grid">
+                    <div class="pilot-stat">
+                        <div class="label">ARTILLERÍA</div>
+                        <input type="number" id="pilot-gunnery" value="4" min="0" max="8">
+                    </div>
+                    <div class="pilot-stat">
+                        <div class="label">PILOTAJE</div>
+                        <input type="number" id="pilot-piloting" value="5" min="0" max="8">
+                    </div>
+                    <div style="text-align:center">
+                        <div class="label" style="color:var(--neon-orange);font-size:11px;">DAÑOS</div>
+                        <div class="pilot-hits" id="pilot-hits"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory & Attacks -->
+            <div class="panel">
+                <div class="panel-title red">Inventario y Ataques</div>
+                <table class="weapons-table">
+                    <thead>
+                        <tr>
+                            <th>#</th><th>Tipo</th><th>Loc</th><th>Cal</th><th>Daño</th>
+                            <th>Min</th><th>Cor</th><th>Med</th><th>Lar</th><th>Disparo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="weapons-body"></tbody>
+                </table>
+                <table class="weapons-table hidden" id="ammo-table" style="margin-top:4px;">
+                    <thead>
+                        <tr><th>Munición</th><th>Loc</th><th>Disparos</th><th>Usar</th></tr>
+                    </thead>
+                    <tbody id="ammo-body"></tbody>
+                </table>
+            </div>
+
+            <!-- Hit Location Table -->
+            <div class="panel">
+                <div class="panel-title cyan">Tabla de Impactos</div>
+                <table class="hit-loc-table" id="hit-loc-table"></table>
+            </div>
+
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             COLUMN 2 — Armor + Internal Structure + Systems
+             ══════════════════════════════════════════════ -->
+        <div style="display:flex; flex-direction:column; gap:8px;">
+
+            <!-- Standard Armor -->
+            <div class="panel">
+                <div class="panel-title">Blindaje Estándar</div>
+                <div class="armor-layout" id="armor-diagram"></div>
+            </div>
+
+            <!-- Internal Structure -->
+            <div class="panel">
+                <div class="panel-title orange">Estructura Interna</div>
+                <div class="structure-layout" id="structure-diagram"></div>
+            </div>
+
+            <!-- System Hits -->
+            <div class="panel">
+                <div class="panel-title red">Daños a Sistemas</div>
+                <div class="system-hits-grid" id="system-hits"></div>
+            </div>
+
+            <!-- Movement -->
+            <div class="panel">
+                <div class="panel-title">Movimiento</div>
+                <div class="penalties-panel" id="penalties-box">
+                    <h4>⚠️ PENALIZACIONES:</h4>
+                    <ul class="penalties-list" id="penalties-list"></ul>
+                </div>
+                <div class="move-controls">
+                    <button class="btn-move active" id="btn-move-0">Inmóvil<br>+0</button>
+                    <button class="btn-move" id="btn-move-1">Andar<br>+1</button>
+                    <button class="btn-move" id="btn-move-2">Correr<br>+2</button>
+                    <button class="btn-move" id="btn-move-3">Saltar<br>+3</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             COLUMN 3 — Critical Hit Table + Heat
+             ══════════════════════════════════════════════ -->
+        <div style="display:flex; flex-direction:column; gap:8px;">
+
+            <!-- Critical Hit Table -->
+            <div class="panel">
+                <div class="panel-title red">Tabla de Críticos</div>
+                <div class="crits-container" id="crits-container"></div>
+            </div>
+
+            <!-- Heat Scale + Effects -->
+            <div class="panel">
+                <div class="panel-title" style="background:var(--neon-hot);">Escala de Calor</div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                    <div class="sinks-badge">
+                        <span class="label">RADIADORES:</span>
+                        <span class="value" id="sinks-value">10</span>
+                    </div>
+                    <span style="color:var(--neon-hot); font-size:14px; font-weight:bold;">
+                        HEAT: <span id="current-heat-title">0</span>
+                    </span>
+                </div>
+                <div class="heat-scale-vertical" id="heat-scale"></div>
+                <div class="heat-math">
+                    <div class="math-row"><span>Calor Base:</span> <span id="math-base">0</span></div>
+                    <div class="math-row" style="color:var(--neon-red);"><span>+ Armas:</span> <span id="math-weap">0</span></div>
+                    <div class="math-row" style="color:var(--neon-red);"><span>+ Movimiento:</span> <span id="math-move">0</span></div>
+                    <div class="math-row" style="color:var(--neon-red); display:none;" id="math-engine"><span>+ Motor (Críticos):</span> <span>0</span></div>
+                    <div class="math-row" style="color:var(--neon-blue);"><span>- Radiadores:</span> <span id="math-sinks">0</span></div>
+                    <div class="math-row total"><span>= PRÓXIMO TURNO:</span> <span id="math-net">0</span></div>
+                </div>
+                <button id="btn-resolve" class="btn-resolve">⚡ RESOLVER FASE DE CALOR</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
