@@ -1,0 +1,1126 @@
+{
+  "light": null,
+  "medium": null,
+  "heavy": null,
+  "assault": null,
+  "vehicles": null,
+  "scanMechs": null,
+  "all": [
+    {
+      "name": "Locust LCT-1E",
+      "bv2": 553
+    },
+    {
+      "name": "Locust LCT-1L",
+      "bv2": 474
+    },
+    {
+      "name": "Locust LCT-1M",
+      "bv2": 424
+    },
+    {
+      "name": "Locust LCT-1S",
+      "bv2": 440
+    },
+    {
+      "name": "Locust LCT-1V",
+      "bv2": 432
+    },
+    {
+      "name": "Locust LCT-3V",
+      "bv2": 490
+    },
+    {
+      "name": "Wasp WSP-1A",
+      "bv2": 384
+    },
+    {
+      "name": "Wasp WSP-1D",
+      "bv2": 403
+    },
+    {
+      "name": "Wasp WSP-1K",
+      "bv2": 376
+    },
+    {
+      "name": "Wasp WSP-1L",
+      "bv2": 335
+    },
+    {
+      "name": "Wasp WSP-1W",
+      "bv2": 373
+    },
+    {
+      "name": "Stinger STG-3G",
+      "bv2": 497
+    },
+    {
+      "name": "Stinger STG-3R",
+      "bv2": 359
+    },
+    {
+      "name": "Flea FLE-4",
+      "bv2": 432
+    },
+    {
+      "name": "Flea FLE-15",
+      "bv2": 430
+    },
+    {
+      "name": "Commando COM-1D",
+      "bv2": 558
+    },
+    {
+      "name": "Commando COM-2D",
+      "bv2": 541
+    },
+    {
+      "name": "Commando COM-3A",
+      "bv2": 540
+    },
+    {
+      "name": "Mongoose MON-66",
+      "bv2": 758
+    },
+    {
+      "name": "Mongoose MON-67",
+      "bv2": 741
+    },
+    {
+      "name": "Mongoose MON-68",
+      "bv2": 737
+    },
+    {
+      "name": "Thorn THE-N",
+      "bv2": 546
+    },
+    {
+      "name": "Thorn THE-S",
+      "bv2": 510
+    },
+    {
+      "name": "Thorn THE-T",
+      "bv2": 500
+    },
+    {
+      "name": "Hornet HNT-151",
+      "bv2": 488
+    },
+    {
+      "name": "Hornet HNT-152",
+      "bv2": 475
+    },
+    {
+      "name": "Hussar HSR-200-D",
+      "bv2": 636
+    },
+    {
+      "name": "Hussar HSR-300-D",
+      "bv2": 543
+    },
+    {
+      "name": "Hussar HSR-350-D",
+      "bv2": 731
+    },
+    {
+      "name": "Hermes HER-1A",
+      "bv2": 601
+    },
+    {
+      "name": "Hermes HER-1B",
+      "bv2": 666
+    },
+    {
+      "name": "Falcon FLC-4N",
+      "bv2": 610
+    },
+    {
+      "name": "Falcon FLC-4P",
+      "bv2": 649
+    },
+    {
+      "name": "Javelin JVN-10F",
+      "bv2": 835
+    },
+    {
+      "name": "Javelin JVN-10N",
+      "bv2": 594
+    },
+    {
+      "name": "Spider SDR-5D",
+      "bv2": 524
+    },
+    {
+      "name": "Spider SDR-5K",
+      "bv2": 503
+    },
+    {
+      "name": "Spider SDR-5V",
+      "bv2": 622
+    },
+    {
+      "name": "UrbanMech UM-R60",
+      "bv2": 504
+    },
+    {
+      "name": "UrbanMech UM-R60L",
+      "bv2": 470
+    },
+    {
+      "name": "UrbanMech UM-R63",
+      "bv2": 540
+    },
+    {
+      "name": "Valkyrie VLK-QA",
+      "bv2": 723
+    },
+    {
+      "name": "Valkyrie VLK-QD",
+      "bv2": 807
+    },
+    {
+      "name": "Valkyrie VLK-QF",
+      "bv2": 653
+    },
+    {
+      "name": "Ostscout OTT-7J",
+      "bv2": 596
+    },
+    {
+      "name": "Ostscout OTT-7K",
+      "bv2": 484
+    },
+    {
+      "name": "Firestarter FS9-H",
+      "bv2": 694
+    },
+    {
+      "name": "Firestarter FS9-M",
+      "bv2": 798
+    },
+    {
+      "name": "Jenner JR7-D",
+      "bv2": 875
+    },
+    {
+      "name": "Jenner JR7-F",
+      "bv2": 1011
+    },
+    {
+      "name": "Panther PNT-8Z",
+      "bv2": 741
+    },
+    {
+      "name": "Panther PNT-9R",
+      "bv2": 769
+    },
+    {
+      "name": "Wolfhound WLF-1",
+      "bv2": 949
+    },
+    {
+      "name": "Wolfhound WLF-1A",
+      "bv2": 862
+    },
+    {
+      "name": "Wolfhound WLF-1B",
+      "bv2": 880
+    },
+    {
+      "name": "Wolfhound WLF-2",
+      "bv2": 1061
+    },
+    {
+      "name": "Raven RVN-1X",
+      "bv2": 747
+    },
+    {
+      "name": "Raven RVN-2X",
+      "bv2": 887
+    },
+    {
+      "name": "Raven RVN-3X",
+      "bv2": 708
+    },
+    {
+      "name": "Raven RVN-4X",
+      "bv2": 820
+    },
+    {
+      "name": "Cicada CDA-2A",
+      "bv2": 659
+    },
+    {
+      "name": "Cicada CDA-2B",
+      "bv2": 626
+    },
+    {
+      "name": "Cicada CDA-3C",
+      "bv2": 771
+    },
+    {
+      "name": "Assassin ASN-21",
+      "bv2": 749
+    },
+    {
+      "name": "Assassin ASN-23",
+      "bv2": 740
+    },
+    {
+      "name": "Assassin ASN-101",
+      "bv2": 757
+    },
+    {
+      "name": "Clint CLNT-1-2R",
+      "bv2": 707
+    },
+    {
+      "name": "Clint CLNT-2-3T",
+      "bv2": 770
+    },
+    {
+      "name": "Clint CLNT-2-4T",
+      "bv2": 619
+    },
+    {
+      "name": "Hermes II HER-2M",
+      "bv2": 910
+    },
+    {
+      "name": "Hermes II HER-2S",
+      "bv2": 784
+    },
+    {
+      "name": "Hermes II HER-4K",
+      "bv2": 976
+    },
+    {
+      "name": "Vulcan VL-2T",
+      "bv2": 642
+    },
+    {
+      "name": "Vulcan VL-5T",
+      "bv2": 942
+    },
+    {
+      "name": "Sentinel STN-1S",
+      "bv2": 664
+    },
+    {
+      "name": "Sentinel STN-3K",
+      "bv2": 652
+    },
+    {
+      "name": "Sentinel STN-3L",
+      "bv2": 717
+    },
+    {
+      "name": "Sentinel STN-3KB",
+      "bv2": 708
+    },
+    {
+      "name": "Whitworth WTH-0",
+      "bv2": 863
+    },
+    {
+      "name": "Whitworth WTH-1",
+      "bv2": 982
+    },
+    {
+      "name": "Whitworth WTH-1S",
+      "bv2": 917
+    },
+    {
+      "name": "Phoenix Hawk PXH-1",
+      "bv2": 1041
+    },
+    {
+      "name": "Phoenix Hawk PXH-1D",
+      "bv2": 1083
+    },
+    {
+      "name": "Phoenix Hawk PXH-1K",
+      "bv2": 1073
+    },
+    {
+      "name": "Blackjack BJ-1",
+      "bv2": 949
+    },
+    {
+      "name": "Blackjack BJ-1DB",
+      "bv2": 1015
+    },
+    {
+      "name": "Blackjack BJ-1DC",
+      "bv2": 917
+    },
+    {
+      "name": "Blackjack BJ-1X",
+      "bv2": 1148
+    },
+    {
+      "name": "Vindicator VND-1AA",
+      "bv2": 966
+    },
+    {
+      "name": "Vindicator VND-1R",
+      "bv2": 1024
+    },
+    {
+      "name": "Vindicator VND-1X",
+      "bv2": 1024
+    },
+    {
+      "name": "Scorpion SCP-1N",
+      "bv2": 1019
+    },
+    {
+      "name": "Hunchback HBK-4G",
+      "bv2": 1041
+    },
+    {
+      "name": "Hunchback HBK-4H",
+      "bv2": 1067
+    },
+    {
+      "name": "Hunchback HBK-4J",
+      "bv2": 1143
+    },
+    {
+      "name": "Hunchback HBK-4N",
+      "bv2": 1087
+    },
+    {
+      "name": "Hunchback HBK-4P",
+      "bv2": 1138
+    },
+    {
+      "name": "Hunchback HBK-4SP",
+      "bv2": 1043
+    },
+    {
+      "name": "Centurion CN9-A",
+      "bv2": 945
+    },
+    {
+      "name": "Centurion CN9-AH",
+      "bv2": 945
+    },
+    {
+      "name": "Centurion CN9-AL",
+      "bv2": 1057
+    },
+    {
+      "name": "Enforcer ENF-4R",
+      "bv2": 1032
+    },
+    {
+      "name": "Trebuchet TBT-5J",
+      "bv2": 1191
+    },
+    {
+      "name": "Trebuchet TBT-5N",
+      "bv2": 1191
+    },
+    {
+      "name": "Trebuchet TBT-5S",
+      "bv2": 984
+    },
+    {
+      "name": "Trebuchet TBT-7K",
+      "bv2": 996
+    },
+    {
+      "name": "Crab CRB-20",
+      "bv2": 1143
+    },
+    {
+      "name": "Crab CRB-27",
+      "bv2": 1198
+    },
+    {
+      "name": "Hatchetman HCT-3F",
+      "bv2": 854
+    },
+    {
+      "name": "Hatchetman HCT-3X",
+      "bv2": 812
+    },
+    {
+      "name": "Wyvern WVE-6N",
+      "bv2": 1005
+    },
+    {
+      "name": "Wyvern WVE-5N",
+      "bv2": 1089
+    },
+    {
+      "name": "Dervish DV-6M",
+      "bv2": 1146
+    },
+    {
+      "name": "Griffin GRF-1N",
+      "bv2": 1272
+    },
+    {
+      "name": "Griffin GRF-1S",
+      "bv2": 1253
+    },
+    {
+      "name": "Shadow Hawk SHD-2D",
+      "bv2": 899
+    },
+    {
+      "name": "Shadow Hawk SHD-2H",
+      "bv2": 1064
+    },
+    {
+      "name": "Shadow Hawk SHD-2K",
+      "bv2": 1147
+    },
+    {
+      "name": "Wolverine WVR-6K",
+      "bv2": 1248
+    },
+    {
+      "name": "Wolverine WVR-6M",
+      "bv2": 1291
+    },
+    {
+      "name": "Wolverine WVR-6R",
+      "bv2": 1101
+    },
+    {
+      "name": "Kintaro KTO-18",
+      "bv2": 1187
+    },
+    {
+      "name": "Kintaro KTO-19",
+      "bv2": 1160
+    },
+    {
+      "name": "Kintaro KTO-20",
+      "bv2": 1357
+    },
+    {
+      "name": "Champion CHP-1N",
+      "bv2": 1233
+    },
+    {
+      "name": "Champion CHP-2N",
+      "bv2": 1116
+    },
+    {
+      "name": "Dragon DRG-1C",
+      "bv2": 1215
+    },
+    {
+      "name": "Dragon DRG-1N",
+      "bv2": 1125
+    },
+    {
+      "name": "Grand Dragon DRG-1G",
+      "bv2": 1300
+    },
+    {
+      "name": "Quickdraw QKD-4G",
+      "bv2": 1192
+    },
+    {
+      "name": "Quickdraw QKD-4H",
+      "bv2": 1242
+    },
+    {
+      "name": "Quickdraw QKD-5A",
+      "bv2": 1196
+    },
+    {
+      "name": "Rifleman RFL-3C",
+      "bv2": 1066
+    },
+    {
+      "name": "Rifleman RFL-3N",
+      "bv2": 1039
+    },
+    {
+      "name": "Rifleman RFL-4D",
+      "bv2": 1173
+    },
+    {
+      "name": "Lancelot LNC25-01",
+      "bv2": 1422
+    },
+    {
+      "name": "Lancelot LNC25-02",
+      "bv2": 1236
+    },
+    {
+      "name": "Ostroc OSR-2C",
+      "bv2": 1228
+    },
+    {
+      "name": "Ostroc OSR-2D",
+      "bv2": 1306
+    },
+    {
+      "name": "Ostroc OSR-2L",
+      "bv2": 1233
+    },
+    {
+      "name": "Ostroc OSR-2M",
+      "bv2": 1239
+    },
+    {
+      "name": "Ostroc OSR-3C",
+      "bv2": 1288
+    },
+    {
+      "name": "Ostsol OTL-4D",
+      "bv2": 1308
+    },
+    {
+      "name": "Ostsol OTL-4F",
+      "bv2": 1264
+    },
+    {
+      "name": "JagerMech JM6-A",
+      "bv2": 1122
+    },
+    {
+      "name": "JagerMech JM6-S",
+      "bv2": 901
+    },
+    {
+      "name": "Catapult CPLT-A1",
+      "bv2": 1285
+    },
+    {
+      "name": "Catapult CPLT-C1",
+      "bv2": 1399
+    },
+    {
+      "name": "Catapult CPLT-C1b",
+      "bv2": 1508
+    },
+    {
+      "name": "Catapult CPLT-C4",
+      "bv2": 1358
+    },
+    {
+      "name": "Catapult CPLT-K2",
+      "bv2": 1319
+    },
+    {
+      "name": "Thunderbolt TDR-5S",
+      "bv2": 1335
+    },
+    {
+      "name": "Thunderbolt TDR-5SE",
+      "bv2": 1414
+    },
+    {
+      "name": "Thunderbolt TDR-5SS",
+      "bv2": 1337
+    },
+    {
+      "name": "Crusader CRD-3D",
+      "bv2": 1338
+    },
+    {
+      "name": "Crusader CRD-3K",
+      "bv2": 1290
+    },
+    {
+      "name": "Crusader CRD-3L",
+      "bv2": 1297
+    },
+    {
+      "name": "Crusader CRD-3R",
+      "bv2": 1317
+    },
+    {
+      "name": "Guillotine GLT-3N",
+      "bv2": 1418
+    },
+    {
+      "name": "Guillotine GLT-4L",
+      "bv2": 1400
+    },
+    {
+      "name": "Cataphract CTF-1X",
+      "bv2": 1316
+    },
+    {
+      "name": "Cataphract CTF-2X",
+      "bv2": 1344
+    },
+    {
+      "name": "Bombardier BMB-10D",
+      "bv2": 1340
+    },
+    {
+      "name": "Bombardier BMB-12D",
+      "bv2": 1480
+    },
+    {
+      "name": "Grasshopper GHR-5H",
+      "bv2": 1427
+    },
+    {
+      "name": "Grasshopper GHR-5J",
+      "bv2": 1354
+    },
+    {
+      "name": "Grasshopper GHR-5N",
+      "bv2": 1493
+    },
+    {
+      "name": "Archer ARC-2K",
+      "bv2": 1356
+    },
+    {
+      "name": "Archer ARC-2R",
+      "bv2": 1477
+    },
+    {
+      "name": "Archer ARC-2Rb",
+      "bv2": 1627
+    },
+    {
+      "name": "Archer ARC-2S",
+      "bv2": 1393
+    },
+    {
+      "name": "Archer ARC-2W",
+      "bv2": 1338
+    },
+    {
+      "name": "Warhammer WHM-6D",
+      "bv2": 1471
+    },
+    {
+      "name": "Warhammer WHM-6K",
+      "bv2": 1305
+    },
+    {
+      "name": "Warhammer WHM-6L",
+      "bv2": 1311
+    },
+    {
+      "name": "Warhammer WHM-6R",
+      "bv2": 1299
+    },
+    {
+      "name": "Flashman FLS-7K",
+      "bv2": 1480
+    },
+    {
+      "name": "Flashman FLS-8K",
+      "bv2": 1779
+    },
+    {
+      "name": "Black Knight BL-6-KNT",
+      "bv2": 1551
+    },
+    {
+      "name": "Black Knight BL-7-KNT",
+      "bv2": 1443
+    },
+    {
+      "name": "Black Knight BL-7-KNT-L",
+      "bv2": 1409
+    },
+    {
+      "name": "Marauder MAD-3D",
+      "bv2": 1470
+    },
+    {
+      "name": "Marauder MAD-3L",
+      "bv2": 1369
+    },
+    {
+      "name": "Marauder MAD-3M",
+      "bv2": 1335
+    },
+    {
+      "name": "Marauder MAD-3R",
+      "bv2": 1363
+    },
+    {
+      "name": "Orion ON1-K",
+      "bv2": 1429
+    },
+    {
+      "name": "Orion ON1-M",
+      "bv2": 1414
+    },
+    {
+      "name": "Orion ON1-V",
+      "bv2": 1298
+    },
+    {
+      "name": "Orion ON1-VA",
+      "bv2": 1328
+    },
+    {
+      "name": "Thug THG-10E",
+      "bv2": 1501
+    },
+    {
+      "name": "Thug THG-11E",
+      "bv2": 1640
+    },
+    {
+      "name": "Goliath GOL-1H",
+      "bv2": 1449
+    },
+    {
+      "name": "Goliath GOL-3M",
+      "bv2": 1540
+    },
+    {
+      "name": "Awesome AWS-8Q",
+      "bv2": 1605
+    },
+    {
+      "name": "Awesome AWS-8R",
+      "bv2": 1470
+    },
+    {
+      "name": "Awesome AWS-8T",
+      "bv2": 1593
+    },
+    {
+      "name": "Awesome AWS-8V",
+      "bv2": 1510
+    },
+    {
+      "name": "Zeus ZEU-6S",
+      "bv2": 1348
+    },
+    {
+      "name": "Zeus ZEU-6T",
+      "bv2": 1436
+    },
+    {
+      "name": "Charger CGR-1A1",
+      "bv2": 981
+    },
+    {
+      "name": "Charger CGR-1A5",
+      "bv2": 1468
+    },
+    {
+      "name": "Charger CGR-1A9",
+      "bv2": 1397
+    },
+    {
+      "name": "Charger CGR-1L",
+      "bv2": 980
+    },
+    {
+      "name": "Charger CGR-SB",
+      "bv2": 1604
+    },
+    {
+      "name": "Victor VTR-9A",
+      "bv2": 1236
+    },
+    {
+      "name": "Victor VTR-9A1",
+      "bv2": 1302
+    },
+    {
+      "name": "Victor VTR-9B",
+      "bv2": 1378
+    },
+    {
+      "name": "Victor VTR-9S",
+      "bv2": 1360
+    },
+    {
+      "name": "BattleMaster BLR-1D",
+      "bv2": 1522
+    },
+    {
+      "name": "BattleMaster BLR-1G",
+      "bv2": 1519
+    },
+    {
+      "name": "BattleMaster BLR-1G-DC",
+      "bv2": 1498
+    },
+    {
+      "name": "BattleMaster BLR-1S",
+      "bv2": 1507
+    },
+    {
+      "name": "Stalker STK-3F",
+      "bv2": 1559
+    },
+    {
+      "name": "Stalker STK-3H",
+      "bv2": 1624
+    },
+    {
+      "name": "Stalker STK-4N",
+      "bv2": 1558
+    },
+    {
+      "name": "Longbow LGB-0W",
+      "bv2": 1337
+    },
+    {
+      "name": "Longbow LGB-7Q",
+      "bv2": 1618
+    },
+    {
+      "name": "Hatamoto-Chi HTM-26T",
+      "bv2": 1536
+    },
+    {
+      "name": "Hatamoto-Chi HTM-27T",
+      "bv2": 1607
+    },
+    {
+      "name": "Highlander HGN-732",
+      "bv2": 2227
+    },
+    {
+      "name": "Highlander HGN-733",
+      "bv2": 1801
+    },
+    {
+      "name": "Highlander HGN-733C",
+      "bv2": 1710
+    },
+    {
+      "name": "Highlander HGN-733P",
+      "bv2": 1696
+    },
+    {
+      "name": "Cyclops CP-10-Q",
+      "bv2": 1584
+    },
+    {
+      "name": "Cyclops CP-10-Z",
+      "bv2": 1317
+    },
+    {
+      "name": "Banshee BNC-3E",
+      "bv2": 1422
+    },
+    {
+      "name": "Banshee BNC-3M",
+      "bv2": 1595
+    },
+    {
+      "name": "Banshee BNC-3Q",
+      "bv2": 1394
+    },
+    {
+      "name": "Banshee BNC-3S",
+      "bv2": 1751
+    },
+    {
+      "name": "King Crab KGC-0000",
+      "bv2": 1810
+    },
+    {
+      "name": "King Crab KGC-000",
+      "bv2": 1906
+    },
+    {
+      "name": "King Crab KGC-010",
+      "bv2": 2181
+    },
+    {
+      "name": "Marauder II MAD-4A",
+      "bv2": 2073
+    },
+    {
+      "name": "Atlas AS7-D",
+      "bv2": 1897
+    },
+    {
+      "name": "Atlas AS7-D-DC",
+      "bv2": 1858
+    },
+    {
+      "name": "Atlas AS7-RS",
+      "bv2": 1849
+    },
+    {
+      "name": "Sai S-3",
+      "bv2": 959
+    },
+    {
+      "name": "Sai S-4",
+      "bv2": 1005
+    },
+    {
+      "name": "Sai S-4C",
+      "bv2": 1778
+    },
+    {
+      "name": "Sai S-4X",
+      "bv2": 830
+    },
+    {
+      "name": "Sai S-7",
+      "bv2": 876
+    },
+    {
+      "name": "Sai S-8",
+      "bv2": 1304
+    },
+    {
+      "name": "Exterminator EXT-4A",
+      "bv2": 1345
+    },
+    {
+      "name": "Exterminator EXT-4C",
+      "bv2": 1228
+    },
+    {
+      "name": "Exterminator EXT-4D",
+      "bv2": 1385
+    },
+    {
+      "name": "Spector SPR-4F",
+      "bv2": 988
+    },
+    {
+      "name": "Spector SPR-5F",
+      "bv2": 1183
+    },
+    {
+      "name": "Mercury MCY-97",
+      "bv2": 469
+    },
+    {
+      "name": "Mercury MCY-98",
+      "bv2": 553
+    },
+    {
+      "name": "Mercury MCY-99",
+      "bv2": 590
+    },
+    {
+      "name": "Talon TLN-5W",
+      "bv2": 1175
+    },
+    {
+      "name": "Starslayer STY-2C",
+      "bv2": 1369
+    },
+    {
+      "name": "Albatross ALB-3U",
+      "bv2": 1668
+    },
+    {
+      "name": "Nightsky NGS-4S",
+      "bv2": 1159
+    },
+    {
+      "name": "Hoplite HOP-4B",
+      "bv2": 989
+    },
+    {
+      "name": "Hoplite HOP-4C",
+      "bv2": 1022
+    },
+    {
+      "name": "Hoplite HOP-4D",
+      "bv2": 1022
+    },
+    {
+      "name": "Buccaneer BCN-3R",
+      "bv2": 1434
+    },
+    {
+      "name": "Lineholder KW1-LH2",
+      "bv2": 1280
+    },
+    {
+      "name": "Lineholder KW1-LH3",
+      "bv2": 1214
+    },
+    {
+      "name": "Osprey OSP-15",
+      "bv2": 1106
+    },
+    {
+      "name": "Osprey OSP-25",
+      "bv2": 1183
+    },
+    {
+      "name": "Osprey OSP-26",
+      "bv2": 1122
+    },
+    {
+      "name": "Merlin MLN-1A",
+      "bv2": 1217
+    },
+    {
+      "name": "Merlin MLN-1B",
+      "bv2": 1205
+    },
+    {
+      "name": "Caesar CES-3R",
+      "bv2": 1578
+    },
+    {
+      "name": "Thanatos THS-4S",
+      "bv2": 2008
+    },
+    {
+      "name": "Cestus CTS-6X",
+      "bv2": 1600
+    },
+    {
+      "name": "Cestus CTS-6Y",
+      "bv2": 1701
+    },
+    {
+      "name": "Spartan SPT-NF",
+      "bv2": 1605
+    },
+    {
+      "name": "Spartan SPT-N1",
+      "bv2": 1573
+    },
+    {
+      "name": "Spartan SPT-N2",
+      "bv2": 1605
+    },
+    {
+      "name": "Crockett CRK-5003-0",
+      "bv2": 1704
+    },
+    {
+      "name": "Crockett CRK-5003-1",
+      "bv2": 1923
+    },
+    {
+      "name": "Emperor EMP-5A",
+      "bv2": 1571
+    },
+    {
+      "name": "Emperor EMP-6A",
+      "bv2": 1969
+    },
+    {
+      "name": "Pillager PLG-1N",
+      "bv2": 1622
+    },
+    {
+      "name": "Pillager PLG-3Z",
+      "bv2": 2697
+    },
+    {
+      "name": "Nightstar NSR-9J",
+      "bv2": 2399
+    }
+  ]
+}
