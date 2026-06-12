@@ -59,6 +59,15 @@
     </div>
 
         
+        <div class="landing-title">KING KARL KURAISSERS</div>
+        <div class="landing-menu" style="z-index: 20;">
+            <button class="cyber-button" onclick="goToBarracones()">Barracones</button>
+            <button class="cyber-button" onclick="goToTRRHub()">TRR Hub</button>
+            <button class="cyber-button" onclick="goToCronicasHub()">Cronicas</button>
+            <button class="cyber-button" onclick="goToSheetDirectly()">Hoja Directa</button>
+            <button class="cyber-button" onclick="abrirCalculadorCombate()">Calculador Combate</button>
+        </div>
+
         <!-- Script para funciones de configuración (debe estar aquí para ser accesible desde landing-page) -->
         
     </div>
@@ -161,10 +170,12 @@
                 <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
                     <span style="color: #ffae00; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;">Cargar Personaje:</span>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                        <button onclick="cargarPersonajePorJugador('Marcos')" class="combat-player-btn" style="background: linear-gradient(135deg, #1a4a1a 0%, #0a2a0a 100%); border: 1px solid #2d5a2d; color: #4ade80; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Marcos</button>
-                        <button onclick="cargarPersonajePorJugador('Jaime')" class="combat-player-btn" style="background: linear-gradient(135deg, #1a3a5a 0%, #0a1a3a 100%); border: 1px solid #2d4a6d; color: #60a5fa; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Jaime</button>
-                        <button onclick="cargarPersonajePorJugador('Joan')" class="combat-player-btn" style="background: linear-gradient(135deg, #4a3a1a 0%, #2a1a0a 100%); border: 1px solid #6d5a2d; color: #fbbf24; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Joan</button>
-                        <button onclick="cargarPersonajePorJugador('Juan')" class="combat-player-btn" style="background: linear-gradient(135deg, #4a1a4a 0%, #2a0a2a 100%); border: 1px solid #6d2d6d; color: #c084fc; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Juan P.</button>
+                        <button id="combat-player-btn-1" data-pilot-slot="1" onclick="cargarPersonajePorJugador('Marcos')" class="combat-player-btn" style="background: linear-gradient(135deg, #1a4a1a 0%, #0a2a0a 100%); border: 1px solid #2d5a2d; color: #4ade80; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Marcos</button>
+                        <button id="combat-player-btn-2" data-pilot-slot="2" onclick="cargarPersonajePorJugador('Jaime')" class="combat-player-btn" style="background: linear-gradient(135deg, #1a3a5a 0%, #0a1a3a 100%); border: 1px solid #2d4a6d; color: #60a5fa; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Jaime</button>
+                        <button id="combat-player-btn-3" data-pilot-slot="3" onclick="cargarPersonajePorJugador('Joan')" class="combat-player-btn" style="background: linear-gradient(135deg, #4a3a1a 0%, #2a1a0a 100%); border: 1px solid #6d5a2d; color: #fbbf24; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Joan</button>
+                        <button id="combat-player-btn-4" data-pilot-slot="4" onclick="cargarPersonajePorJugador('Juan')" class="combat-player-btn" style="background: linear-gradient(135deg, #4a1a4a 0%, #2a0a2a 100%); border: 1px solid #6d2d6d; color: #c084fc; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Juan P.</button>
+                        <button id="combat-player-btn-5" data-pilot-slot="5" onclick="cargarPersonajePorJugador('Invitado')" class="combat-player-btn" style="background: linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%); border: 1px solid #666; color: #ddd; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Invitado</button>
+                        <button id="combat-player-btn-6" data-pilot-slot="6" onclick="cargarPersonajePorJugador('Invitado 2')" class="combat-player-btn" style="background: linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%); border: 1px solid #666; color: #ddd; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 11px;">Invitado 2</button>
                     </div>
                 </div>
                 <div id="combat-loaded-char" style="color: #4ade80; font-size: 13px; margin-top: 10px;"></div>
@@ -1275,7 +1286,7 @@
         
         <!-- BOTONES DE CARGA RÁPIDA DE PERSONAJES -->
         <div id="quick-load-buttons" class="no-print" style="position: fixed; top: 70px; left: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 2001;">
-            <button onclick="cargarPersonajeRapido('Marcos')" style="
+            <button id="quick-btn-pilot1" data-pilot-slot="1" onclick="cargarPersonajeRapido('Marcos')" style="
                 padding: 7px 16px; 
                 background: linear-gradient(135deg, #ff8c42 0%, #d67635 100%); 
                 border: 1px solid #00ff41; 
@@ -1289,7 +1300,7 @@
                 text-shadow: 0 0 5px rgba(255, 140, 66, 0.5);
                 box-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
             " onmouseover="this.style.boxShadow='0 0 20px rgba(0, 255, 65, 0.8)'; this.style.transform='scale(1.05)'" onmouseout="this.style.boxShadow='0 0 10px rgba(255, 140, 66, 0.4)'; this.style.transform='scale(1)'">Marcos</button>
-            <button onclick="cargarPersonajeRapido('Jaime')" style="
+            <button id="quick-btn-pilot2" data-pilot-slot="2" onclick="cargarPersonajeRapido('Jaime')" style="
                 padding: 7px 16px; 
                 background: linear-gradient(135deg, #ff8c42 0%, #d67635 100%); 
                 border: 1px solid #00ff41; 
@@ -1303,7 +1314,7 @@
                 text-shadow: 0 0 5px rgba(255, 140, 66, 0.5);
                 box-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
             " onmouseover="this.style.boxShadow='0 0 20px rgba(0, 255, 65, 0.8)'; this.style.transform='scale(1.05)'" onmouseout="this.style.boxShadow='0 0 10px rgba(255, 140, 66, 0.4)'; this.style.transform='scale(1)'">Jaime</button>
-            <button onclick="cargarPersonajeRapido('Joan')" style="
+            <button id="quick-btn-pilot3" data-pilot-slot="3" onclick="cargarPersonajeRapido('Joan')" style="
                 padding: 7px 16px; 
                 background: linear-gradient(135deg, #ff8c42 0%, #d67635 100%); 
                 border: 1px solid #00ff41; 
@@ -1317,7 +1328,7 @@
                 text-shadow: 0 0 5px rgba(255, 140, 66, 0.5);
                 box-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
             " onmouseover="this.style.boxShadow='0 0 20px rgba(0, 255, 65, 0.8)'; this.style.transform='scale(1.05)'" onmouseout="this.style.boxShadow='0 0 10px rgba(255, 140, 66, 0.4)'; this.style.transform='scale(1)'">Joan</button>
-            <button onclick="cargarPersonajeRapido('Juan Palacios')" style="
+            <button id="quick-btn-pilot4" data-pilot-slot="4" onclick="cargarPersonajeRapido('Juan Palacios')" style="
                 padding: 7px 16px; 
                 background: linear-gradient(135deg, #ff8c42 0%, #d67635 100%); 
                 border: 1px solid #00ff41; 
@@ -1331,6 +1342,34 @@
                 text-shadow: 0 0 5px rgba(255, 140, 66, 0.5);
                 box-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
             " onmouseover="this.style.boxShadow='0 0 20px rgba(0, 255, 65, 0.8)'; this.style.transform='scale(1.05)'" onmouseout="this.style.boxShadow='0 0 10px rgba(255, 140, 66, 0.4)'; this.style.transform='scale(1)'">Juan Palacios</button>
+            <button id="quick-btn-pilot5" data-pilot-slot="5" onclick="cargarPersonajeRapido('Invitado')" style="
+                padding: 7px 16px; 
+                background: linear-gradient(135deg, #ff8c42 0%, #d67635 100%); 
+                border: 1px solid #00ff41; 
+                color: #ffffff; 
+                font-weight: bold; 
+                font-size: 10px; 
+                cursor: pointer; 
+                font-family: 'Share Tech Mono', monospace;
+                clip-path: polygon(5% 0, 100% 0, 100% 70%, 95% 100%, 0 100%, 0 30%);
+                transition: all 0.3s;
+                text-shadow: 0 0 5px rgba(255, 140, 66, 0.5);
+                box-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
+            " onmouseover="this.style.boxShadow='0 0 20px rgba(0, 255, 65, 0.8)'; this.style.transform='scale(1.05)'" onmouseout="this.style.boxShadow='0 0 10px rgba(255, 140, 66, 0.4)'; this.style.transform='scale(1)'">Invitado</button>
+            <button id="quick-btn-pilot6" data-pilot-slot="6" onclick="cargarPersonajeRapido('Invitado 2')" style="
+                padding: 7px 16px; 
+                background: linear-gradient(135deg, #ff8c42 0%, #d67635 100%); 
+                border: 1px solid #00ff41; 
+                color: #ffffff; 
+                font-weight: bold; 
+                font-size: 10px; 
+                cursor: pointer; 
+                font-family: 'Share Tech Mono', monospace;
+                clip-path: polygon(5% 0, 100% 0, 100% 70%, 95% 100%, 0 100%, 0 30%);
+                transition: all 0.3s;
+                text-shadow: 0 0 5px rgba(255, 140, 66, 0.5);
+                box-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
+            " onmouseover="this.style.boxShadow='0 0 20px rgba(0, 255, 65, 0.8)'; this.style.transform='scale(1.05)'" onmouseout="this.style.boxShadow='0 0 10px rgba(255, 140, 66, 0.4)'; this.style.transform='scale(1)'">Invitado 2</button>
         </div>
         
         <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
@@ -2207,7 +2246,7 @@
     
     <div class="xp-players-grid">
         <!-- MARCOS -->
-        <div class="xp-player-card" data-player="Marcos">
+        <div class="xp-player-card" data-player="Marcos" data-pilot-slot="1">
             <div class="xp-player-name">👤 MARCOS</div>
             
             <div class="xp-control-group">
@@ -2231,7 +2270,7 @@
         </div>
         
         <!-- JAIME -->
-        <div class="xp-player-card" data-player="Jaime">
+        <div class="xp-player-card" data-player="Jaime" data-pilot-slot="2">
             <div class="xp-player-name">👤 JAIME</div>
             
             <div class="xp-control-group">
@@ -2255,7 +2294,7 @@
         </div>
         
         <!-- JOAN -->
-        <div class="xp-player-card" data-player="Joan">
+        <div class="xp-player-card" data-player="Joan" data-pilot-slot="3">
             <div class="xp-player-name">👤 JOAN</div>
             
             <div class="xp-control-group">
@@ -2279,7 +2318,7 @@
         </div>
         
         <!-- JUAN PALACIOS -->
-        <div class="xp-player-card" data-player="Juan">
+        <div class="xp-player-card" data-player="Juan" data-pilot-slot="4">
             <div class="xp-player-name">👤 JUAN PALACIOS</div>
             
             <div class="xp-control-group">
@@ -2300,6 +2339,47 @@
                 <div class="xp-expense-total-label">Total Gastado:</div>
                 <div class="xp-expense-total-value" data-total="Juan">0 XP</div>
             </div>
+        </div>
+        <!-- INVITADO -->
+        <div class="xp-player-card" data-player="Invitado" data-pilot-slot="5">
+            <div class="xp-player-name">INVITADO</div>
+            <div class="xp-control-group">
+                <span class="xp-control-label">XP Ganado</span>
+                <div style="display:flex; gap:4px; align-items:center;">
+                    <button onclick="ajustarXPGanado('xp-invitado',-100)" style="padding:3px 8px; background:#2a0a0a; border:1px solid #b71c1c; color:#ef4444; font-family:'Share Tech Mono',monospace; font-size:12px; font-weight:bold; cursor:pointer; flex-shrink:0;">-100</button>
+                    <input type="number" class="xp-input-ganado" id="xp-invitado" min="0" value="0" placeholder="0" style="flex:1;">
+                    <button onclick="ajustarXPGanado('xp-invitado',100)" style="padding:3px 8px; background:#0a2a0a; border:1px solid #16a34a; color:#4ade80; font-family:'Share Tech Mono',monospace; font-size:12px; font-weight:bold; cursor:pointer; flex-shrink:0;">+100</button>
+                </div>
+            </div>
+            <div class="xp-control-group">
+                <span class="xp-control-label">Repetir Tirada <span class="reroll-counter" data-player-rerolls="Invitado">0/0</span></span>
+                <div class="xp-button-row" id="rerolls-Invitado"></div>
+            </div>
+            <div class="xp-expense-total">
+                <div class="xp-expense-total-label">Total Gastado:</div>
+                <div class="xp-expense-total-value" data-total="Invitado">0 XP</div>
+            </div>
+        </div>
+        <!-- INVITADO 2 -->
+        <div class="xp-player-card" data-player="Invitado 2" data-pilot-slot="6">
+            <div class="xp-player-name">INVITADO 2</div>
+            <div class="xp-control-group">
+                <span class="xp-control-label">XP Ganado</span>
+                <div style="display:flex; gap:4px; align-items:center;">
+                    <button onclick="ajustarXPGanado('xp-invitado2',-100)" style="padding:3px 8px; background:#2a0a0a; border:1px solid #b71c1c; color:#ef4444; font-family:'Share Tech Mono',monospace; font-size:12px; font-weight:bold; cursor:pointer; flex-shrink:0;">-100</button>
+                    <input type="number" class="xp-input-ganado" id="xp-invitado2" min="0" value="0" placeholder="0" style="flex:1;">
+                    <button onclick="ajustarXPGanado('xp-invitado2',100)" style="padding:3px 8px; background:#0a2a0a; border:1px solid #16a34a; color:#4ade80; font-family:'Share Tech Mono',monospace; font-size:12px; font-weight:bold; cursor:pointer; flex-shrink:0;">+100</button>
+                </div>
+            </div>
+            <div class="xp-control-group">
+                <span class="xp-control-label">Repetir Tirada <span class="reroll-counter" data-player-rerolls="Invitado 2">0/0</span></span>
+                <div class="xp-button-row" id="rerolls-Invitado-2"></div>
+            </div>
+            <div class="xp-expense-total">
+                <div class="xp-expense-total-label">Total Gastado:</div>
+                <div class="xp-expense-total-value" data-total="Invitado 2">0 XP</div>
+            </div>
+        </div>
         </div>
     </div>
 </div>
@@ -4412,6 +4492,7 @@
                             <input type="text" id="config-piloto1-rango" placeholder="Rango" style="flex: 1; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
                         </div>
                         <input type="text" id="config-piloto1-mech" placeholder="Mech (ej: Marauder MAD-3R)" style="width: 100%; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                        <input type="text" id="config-piloto1-foto" placeholder="Foto URL / ruta (opcional)" style="width: 100%; margin-top: 6px; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
                     </div>
                     <!-- Piloto 2 -->
                     <div style="background: rgba(0,0,0,0.3); padding: 10px; border: 1px solid #333;">
@@ -4421,6 +4502,7 @@
                             <input type="text" id="config-piloto2-rango" placeholder="Rango" style="flex: 1; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
                         </div>
                         <input type="text" id="config-piloto2-mech" placeholder="Mech (ej: Warhammer WHM-6R)" style="width: 100%; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                        <input type="text" id="config-piloto2-foto" placeholder="Foto URL / ruta (opcional)" style="width: 100%; margin-top: 6px; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
                     </div>
                     <!-- Piloto 3 -->
                     <div style="background: rgba(0,0,0,0.3); padding: 10px; border: 1px solid #333;">
@@ -4430,6 +4512,7 @@
                             <input type="text" id="config-piloto3-rango" placeholder="Rango" style="flex: 1; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
                         </div>
                         <input type="text" id="config-piloto3-mech" placeholder="Mech (ej: Griffin GRF-1N)" style="width: 100%; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                        <input type="text" id="config-piloto3-foto" placeholder="Foto URL / ruta (opcional)" style="width: 100%; margin-top: 6px; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
                     </div>
                     <!-- Piloto 4 -->
                     <div style="background: rgba(0,0,0,0.3); padding: 10px; border: 1px solid #333;">
@@ -4439,6 +4522,27 @@
                             <input type="text" id="config-piloto4-rango" placeholder="Rango" style="flex: 1; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
                         </div>
                         <input type="text" id="config-piloto4-mech" placeholder="Mech (ej: Shadow Hawk SHD-2H)" style="width: 100%; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                        <input type="text" id="config-piloto4-foto" placeholder="Foto URL / ruta (opcional)" style="width: 100%; margin-top: 6px; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                    </div>
+                    <!-- Piloto 5 -->
+                    <div style="background: rgba(0,0,0,0.3); padding: 10px; border: 1px solid #333;">
+                        <div style="color: #ffae00; font-size: 11px; margin-bottom: 8px; font-weight: bold;">PILOTO 5</div>
+                        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                            <input type="text" id="config-piloto5-nombre" placeholder="Nombre" style="flex: 2; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                            <input type="text" id="config-piloto5-rango" placeholder="Rango" style="flex: 1; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                        </div>
+                        <input type="text" id="config-piloto5-mech" placeholder="Mech" style="width: 100%; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                        <input type="text" id="config-piloto5-foto" placeholder="Foto URL / ruta (opcional)" style="width: 100%; margin-top: 6px; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                    </div>
+                    <!-- Piloto 6 -->
+                    <div style="background: rgba(0,0,0,0.3); padding: 10px; border: 1px solid #333;">
+                        <div style="color: #ffae00; font-size: 11px; margin-bottom: 8px; font-weight: bold;">PILOTO 6</div>
+                        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                            <input type="text" id="config-piloto6-nombre" placeholder="Nombre" style="flex: 2; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                            <input type="text" id="config-piloto6-rango" placeholder="Rango" style="flex: 1; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                        </div>
+                        <input type="text" id="config-piloto6-mech" placeholder="Mech" style="width: 100%; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
+                        <input type="text" id="config-piloto6-foto" placeholder="Foto URL / ruta (opcional)" style="width: 100%; margin-top: 6px; background: #0a0a0a; border: 1px solid #5c4200; padding: 6px; color: #e0e0e0; font-size: 11px; box-sizing: border-box;">
                     </div>
                 </div>
             </div>
@@ -4961,3 +5065,7 @@
     <script src="js/app.js"></script>
 </body>
 </html>
+
+
+
+

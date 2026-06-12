@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', poblarDesplegablesArmasBarracones);
+document.addEventListener('DOMContentLoaded', poblarSelectoresArmasBarracones);
 
         // --- FUNCIONES DE INTERACTIVIDAD ---
         function toggleBox(element) {
@@ -663,6 +663,7 @@ document.addEventListener('DOMContentLoaded', poblarDesplegablesArmasBarracones)
          */
         function goToRegistroCombate() {
             console.log('🎯 Navegando a Registro de Combate...');
+            cargarPilotosDesdeConfiguracion();
                 // Ocultar todas las secciones
             document.getElementById('landing-page').style.display = 'none';
             document.getElementById('pre-generacion').style.display = 'none';
@@ -695,11 +696,12 @@ document.addEventListener('DOMContentLoaded', poblarDesplegablesArmasBarracones)
          */
         function abrirModalRecompensas() {
             console.log('💰 Abriendo modal de recompensas...');
+            cargarPilotosDesdeConfiguracion();
                 // Resetear todos los inputs
-            document.getElementById('xp-marcos').value = '0';
-            document.getElementById('xp-jaime').value = '0';
-            document.getElementById('xp-joan').value = '0';
-            document.getElementById('xp-juan').value = '0';
+            XP_INPUT_IDS_COMISION.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) input.value = '0';
+            });
             document.getElementById('recompensas-dinero-unidad').value = '0';
             document.getElementById('recompensas-gastos-unidad').value = '0';
             document.getElementById('recompensas-estado').style.display = 'none';
@@ -715,6 +717,7 @@ document.addEventListener('DOMContentLoaded', poblarDesplegablesArmasBarracones)
          */
         function abrirModalRecompensasConXP(xpArray) {
             console.log('💰 Abriendo modal de recompensas con XP del Battle Tracker...');
+            cargarPilotosDesdeConfiguracion();
             
             // Resetear solo dinero y gastos (NO resetear XP)
             document.getElementById('recompensas-dinero-unidad').value = '0';
@@ -722,7 +725,7 @@ document.addEventListener('DOMContentLoaded', poblarDesplegablesArmasBarracones)
             document.getElementById('recompensas-estado').style.display = 'none';
             
             // Copiar XP del Battle Tracker
-            const inputIds = ['xp-marcos', 'xp-jaime', 'xp-joan', 'xp-juan'];
+            const inputIds = XP_INPUT_IDS_COMISION;
             inputIds.forEach((id, idx) => {
                 const input = document.getElementById(id);
                 if (input && xpArray[idx] !== undefined) {
@@ -745,6 +748,196 @@ document.addEventListener('DOMContentLoaded', poblarDesplegablesArmasBarracones)
  * ============================================================================
  */
 
+// Catálogo de pilotos de unidad (6)
+const PILOTOS_UNIDAD = ['Marcos', 'Jaime', 'Joan', 'Juan', 'Invitado', 'Invitado 2'];
+const PILOTOS_CONFIGURACION = [1, 2, 3, 4, 5, 6];
+const XP_INPUT_IDS_COMISION = ['xp-marcos', 'xp-jaime', 'xp-joan', 'xp-juan', 'xp-invitado', 'xp-invitado2'];
+const PILOTO_CLAVE_A_SLOT = {
+    'Marcos': 1,
+    'Jaime': 2,
+    'Joan': 3,
+    'Juan': 4,
+    'Invitado': 5,
+    'Invitado 2': 6
+};
+const PILOTO_SLOT_A_CLAVE = {
+    1: 'Marcos',
+    2: 'Jaime',
+    3: 'Joan',
+    4: 'Juan',
+    5: 'Invitado',
+    6: 'Invitado 2'
+};
+const PILOTO_SLOT_DEFAULT = {
+    1: { nombre: 'Marcos', mech: '', foto: '' },
+    2: { nombre: 'Jaime', mech: '', foto: '' },
+    3: { nombre: 'Joan', mech: '', foto: '' },
+    4: { nombre: 'Juan Palacios', mech: '', foto: '' },
+    5: { nombre: 'Invitado', mech: '', foto: '' },
+    6: { nombre: 'Invitado 2', mech: '', foto: '' }
+};
+let pilotosConfigRuntime = { ...PILOTO_SLOT_DEFAULT };
+
+function getRerollsContainerId(player) {
+    return `rerolls-${player.replace(/\s+/g, '-')}`;
+}
+
+function getPilotConfigBySlot(slot) {
+    return pilotosConfigRuntime[slot] || PILOTO_SLOT_DEFAULT[slot] || { nombre: `Piloto ${slot}`, mech: '', foto: '' };
+}
+
+function getPilotConfigByKey(key) {
+    const slot = PILOTO_CLAVE_A_SLOT[key];
+    return getPilotConfigBySlot(slot);
+}
+
+function getPilotDisplayNameByKey(key) {
+    return getPilotConfigByKey(key).nombre || key;
+}
+
+function getXpInputIdFromJugador(jugadorRaw) {
+    const jug = (jugadorRaw || '').toLowerCase();
+
+    // Prioridad: coincidencia con nombres configurados
+    for (const key of PILOTOS_UNIDAD) {
+        const cfgName = (getPilotDisplayNameByKey(key) || '').toLowerCase();
+        if (cfgName && (jug === cfgName || jug.includes(cfgName) || cfgName.includes(jug))) {
+            if (key === 'Marcos') return 'xp-marcos';
+            if (key === 'Jaime') return 'xp-jaime';
+            if (key === 'Joan') return 'xp-joan';
+            if (key === 'Juan') return 'xp-juan';
+            if (key === 'Invitado') return 'xp-invitado';
+            if (key === 'Invitado 2') return 'xp-invitado2';
+        }
+    }
+
+    // Fallback legacy
+    if (jug.includes('marcos')) return 'xp-marcos';
+    if (jug.includes('jaime')) return 'xp-jaime';
+    if (jug.includes('joan')) return 'xp-joan';
+    if (jug.includes('juan')) return 'xp-juan';
+    if (jug.includes('invitado 2') || jug.includes('invitado2')) return 'xp-invitado2';
+    if (jug.includes('invitado')) return 'xp-invitado';
+    return null;
+}
+
+function renderPilotMetaInComisionCard(card, slot) {
+    if (!card) return;
+    const cfg = getPilotConfigBySlot(slot);
+    const nameEl = card.querySelector('.xp-player-name');
+    if (nameEl) nameEl.textContent = `👤 ${(cfg.nombre || `Piloto ${slot}`).toUpperCase()}`;
+
+    let meta = card.querySelector('.xp-player-meta');
+    if (!meta) {
+        meta = document.createElement('div');
+        meta.className = 'xp-player-meta';
+        if (nameEl) nameEl.insertAdjacentElement('afterend', meta);
+    }
+
+    const foto = cfg.foto || '';
+    const mech = cfg.mech || 'Mech no configurado';
+    meta.innerHTML = `
+        <div style="display:flex; gap:8px; align-items:center; margin:8px 0 10px; padding:6px; border:1px solid rgba(255,174,0,0.35); background:rgba(0,0,0,0.3);">
+            <div style="width:42px; height:42px; border:1px solid #5c4200; background:#0a0a0a; flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                ${foto ? `<img src="${foto}" alt="Piloto ${slot}" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.textContent='👤';">` : '👤'}
+            </div>
+            <div style="min-width:0;">
+                <div style="font-size:10px; color:#888; letter-spacing:1px; text-transform:uppercase;">Mech</div>
+                <div style="font-size:11px; color:#ffae00; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${mech}</div>
+            </div>
+        </div>
+    `;
+}
+
+function renderPilotButtonInBarracones(slot) {
+    const btn = document.getElementById(`quick-btn-pilot${slot}`);
+    if (!btn) return;
+    const cfg = getPilotConfigBySlot(slot);
+    const nombre = cfg.nombre || `Piloto ${slot}`;
+    const mech = cfg.mech || 'Sin mech';
+    const foto = cfg.foto || '';
+
+    btn.onclick = () => cargarPersonajeRapido(nombre);
+    btn.innerHTML = `
+        <div style="display:flex; gap:8px; align-items:center; text-align:left;">
+            <div style="width:28px; height:28px; border:1px solid rgba(0,255,65,0.5); background:rgba(0,0,0,0.45); flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                ${foto ? `<img src="${foto}" alt="Piloto ${slot}" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.textContent='👤';">` : '👤'}
+            </div>
+            <div style="min-width:0; line-height:1.15;">
+                <div style="font-size:10px; font-weight:bold; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${nombre}</div>
+                <div style="font-size:9px; color:#ffae00; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${mech}</div>
+            </div>
+        </div>
+    `;
+}
+
+function renderPilotButtonInCombate(slot) {
+    const btn = document.getElementById(`combat-player-btn-${slot}`);
+    if (!btn) return;
+    const cfg = getPilotConfigBySlot(slot);
+    const nombre = cfg.nombre || `Piloto ${slot}`;
+    btn.textContent = nombre;
+    btn.onclick = () => cargarPersonajePorJugador(nombre);
+}
+
+function aplicarPilotosConfiguradosEnUI() {
+    // Barracones botones
+    for (const slot of PILOTOS_CONFIGURACION) {
+        renderPilotButtonInBarracones(slot);
+        renderPilotButtonInCombate(slot);
+    }
+
+    // Comisión tarjetas
+    document.querySelectorAll('.xp-player-card[data-pilot-slot]').forEach(card => {
+        const slot = parseInt(card.getAttribute('data-pilot-slot'), 10);
+        if (!Number.isNaN(slot)) renderPilotMetaInComisionCard(card, slot);
+    });
+}
+
+async function cargarPilotosDesdeConfiguracion(usarUI = false) {
+    // Si venimos del panel de configuración ya tenemos datos en UI
+    if (usarUI) {
+        for (const slot of PILOTOS_CONFIGURACION) {
+            const nombre = document.getElementById(`config-piloto${slot}-nombre`)?.value?.trim();
+            const mech = document.getElementById(`config-piloto${slot}-mech`)?.value?.trim();
+            const foto = document.getElementById(`config-piloto${slot}-foto`)?.value?.trim();
+            pilotosConfigRuntime[slot] = {
+                nombre: nombre || PILOTO_SLOT_DEFAULT[slot].nombre,
+                mech: mech || '',
+                foto: foto || ''
+            };
+        }
+        aplicarPilotosConfiguradosEnUI();
+        return;
+    }
+
+    try {
+        if (typeof GOOGLE_SCRIPT_URL === 'undefined' || GOOGLE_SCRIPT_URL.includes("YOUR_GOOGLE_SCRIPT")) {
+            aplicarPilotosConfiguradosEnUI();
+            return;
+        }
+        const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=getConfiguracion`);
+        const data = await response.json();
+        if (data.result === 'success' && data.config) {
+            configCargada = data.config;
+            for (const slot of PILOTOS_CONFIGURACION) {
+                pilotosConfigRuntime[slot] = {
+                    nombre: (data.config[`PILOTO_${slot}_NOMBRE`] || '').trim() || PILOTO_SLOT_DEFAULT[slot].nombre,
+                    mech: (data.config[`PILOTO_${slot}_MECH`] || '').trim(),
+                    foto: (data.config[`PILOTO_${slot}_FOTO`] || '').trim()
+                };
+            }
+        }
+    } catch (error) {
+        console.error('Error cargando pilotos de configuración:', error);
+    } finally {
+        aplicarPilotosConfiguradosEnUI();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    cargarPilotosDesdeConfiguracion();
+});
 // Configuración de niveles y rerolls
 const REROLL_CONFIG = {
     'Novato': { max: 1, cost: 100 },        // 0-5,000 XP
@@ -755,12 +948,9 @@ const REROLL_CONFIG = {
 };
 
 // Tracking de gastos por jugador
-const expenseTracker = {
-    'Marcos': { iniciativa: false, rerolls: 0, quirks: 0, nivel: 'Novato' },
-    'Jaime': { iniciativa: false, rerolls: 0, quirks: 0, nivel: 'Novato' },
-    'Joan': { iniciativa: false, rerolls: 0, quirks: 0, nivel: 'Novato' },
-    'Juan': { iniciativa: false, rerolls: 0, quirks: 0, nivel: 'Novato' }
-};
+const expenseTracker = Object.fromEntries(
+    PILOTOS_UNIDAD.map(p => [p, { iniciativa: false, rerolls: 0, quirks: 0, nivel: 'Novato' }])
+);
 
 // ============================================================
 // QUIRKS DEL BATTLEMECH MANUAL
@@ -847,7 +1037,7 @@ function inicializarGastosXP() {
 async function obtenerNivelesPersonajes() {
     console.log('📊 Calculando niveles de veteranía según XP Total...');
     
-    const jugadores = ['Marcos', 'Jaime', 'Joan', 'Juan'];
+    const jugadores = PILOTOS_UNIDAD;
     
     for (const jugador of jugadores) {
         const xpTotal = xpTotalJugadores[jugador]; // Usar XP TOTAL, no disponible
@@ -868,7 +1058,7 @@ async function obtenerNivelesPersonajes() {
 function generarBotonesReroll(jugador) {
     const nivel = expenseTracker[jugador].nivel;
     const config = REROLL_CONFIG[nivel];
-    const container = document.getElementById(`rerolls-${jugador}`);
+    const container = document.getElementById(getRerollsContainerId(jugador));
     
     if (!container) return;
     
@@ -1035,20 +1225,10 @@ function resetearGastosXP() {
  */
 
 // Variable global para almacenar XP disponible de cada jugador
-const xpDisponibleJugadores = {
-    'Marcos': 0,
-    'Jaime': 0,
-    'Joan': 0,
-    'Juan': 0
-};
+const xpDisponibleJugadores = Object.fromEntries(PILOTOS_UNIDAD.map(p => [p, 0]));
 
 // Variable global para almacenar XP Total de cada jugador (para calcular nivel)
-const xpTotalJugadores = {
-    'Marcos': 0,
-    'Jaime': 0,
-    'Joan': 0,
-    'Juan': 0
-};
+const xpTotalJugadores = Object.fromEntries(PILOTOS_UNIDAD.map(p => [p, 0]));
 
 /**
  * Carga el XP disponible de todos los jugadores desde Google Sheets
@@ -1056,11 +1236,12 @@ const xpTotalJugadores = {
 async function cargarXPDisponible() {
     console.log('📊 Cargando XP disponible de jugadores...');
     
-    const jugadores = ['Marcos', 'Jaime', 'Joan', 'Juan'];
+    const jugadores = PILOTOS_UNIDAD;
     
     for (const jugador of jugadores) {
         try {
-            const url = `${GOOGLE_SCRIPT_URL}?jugador=${jugador}`;
+            const jugadorBusqueda = getPilotDisplayNameByKey(jugador);
+            const url = `${GOOGLE_SCRIPT_URL}?jugador=${encodeURIComponent(jugadorBusqueda)}`;
             const response = await fetch(url);
             const data = await response.json();
             
@@ -1069,7 +1250,7 @@ async function cargarXPDisponible() {
                 xpDisponibleJugadores[jugador] = personaje.xpDisponible || 0;
                 xpTotalJugadores[jugador] = personaje.xpTotal || 0;
                 
-                console.log(`  ${jugador}: ${xpDisponibleJugadores[jugador]} XP disponible | ${xpTotalJugadores[jugador]} XP total`);
+                console.log(`  ${jugadorBusqueda} (${jugador}): ${xpDisponibleJugadores[jugador]} XP disponible | ${xpTotalJugadores[jugador]} XP total`);
                 
                 // Actualizar display en la tarjeta
                 actualizarDisplayXPDisponible(jugador);
@@ -1157,7 +1338,7 @@ function actualizarEstadoBotonesSegunXP() {
         }
         
         // Verificar botones de reroll
-        const botonesReroll = document.querySelectorAll(`#rerolls-${jugador} .xp-expense-btn`);
+        const botonesReroll = document.querySelectorAll(`#${getRerollsContainerId(jugador)} .xp-expense-btn`);
         botonesReroll.forEach(btn => {
             const costo = config.cost;
             if (xpDisponible < costo) {
@@ -1386,6 +1567,8 @@ async function registrarMisionConGastos() {
         jaime: parseInt(document.getElementById('xp-jaime').value) || 0,
         joan: parseInt(document.getElementById('xp-joan').value) || 0,
         juan: parseInt(document.getElementById('xp-juan').value) || 0,
+        invitado: parseInt(document.getElementById('xp-invitado').value) || 0,
+        invitado2: parseInt(document.getElementById('xp-invitado2').value) || 0,
         dinero: parseInt(document.getElementById('dinero-ganado').value) || 0,
         gastos: parseInt(document.getElementById('gastos').value) || 0,
         descripcion: 'Misión completada'
@@ -1457,6 +1640,8 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
             const xpJaime = parseInt(document.getElementById('xp-jaime').value) || 0;
             const xpJoan = parseInt(document.getElementById('xp-joan').value) || 0;
             const xpJuan = parseInt(document.getElementById('xp-juan').value) || 0;
+            const xpInvitado = parseInt(document.getElementById('xp-invitado').value) || 0;
+            const xpInvitado2 = parseInt(document.getElementById('xp-invitado2').value) || 0;
             const dineroGanado = parseInt(document.getElementById('recompensas-dinero-unidad').value) || 0;
             const gastos = parseInt(document.getElementById('recompensas-gastos-unidad').value) || 0;
             
@@ -1464,20 +1649,30 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
             const gastosXP = obtenerGastosParaRegistro();
             
                 // Validar que hay algo que registrar (XP ganado, dinero, gastos de unidad, o gastos de XP)
-            if (xpMarcos === 0 && xpJaime === 0 && xpJoan === 0 && xpJuan === 0 && 
+            if (xpMarcos === 0 && xpJaime === 0 && xpJoan === 0 && xpJuan === 0 &&
+                xpInvitado === 0 && xpInvitado2 === 0 &&
                 dineroGanado === 0 && gastos === 0 && gastosXP.length === 0) {
                 alert('Por favor ingresa al menos un valor diferente de 0 o marca algún gasto de XP');
                 return;
             }
                 // === CREAR RESUMEN ===
+            const nombreP1 = getPilotDisplayNameByKey('Marcos');
+            const nombreP2 = getPilotDisplayNameByKey('Jaime');
+            const nombreP3 = getPilotDisplayNameByKey('Joan');
+            const nombreP4 = getPilotDisplayNameByKey('Juan');
+            const nombreP5 = getPilotDisplayNameByKey('Invitado');
+            const nombreP6 = getPilotDisplayNameByKey('Invitado 2');
+
             let resumen = 'Se registrará la siguiente misión:\n\n';
-            resumen += `👤 Marcos: ${xpMarcos} XP\n`;
-            resumen += `👤 Jaime: ${xpJaime} XP\n`;
-            resumen += `👤 Joan: ${xpJoan} XP\n`;
-            resumen += `👤 Juan Palacios: ${xpJuan} XP\n\n`;
-            resumen += `💰 Dinero: ${dineroGanado} C-Bills\n`;
-            resumen += `💸 Gastos: ${gastos} C-Bills\n\n`;
-            resumen += `¿Confirmar?`;
+            resumen += `${nombreP1}: ${xpMarcos} XP\n`;
+            resumen += `${nombreP2}: ${xpJaime} XP\n`;
+            resumen += `${nombreP3}: ${xpJoan} XP\n`;
+            resumen += `${nombreP4}: ${xpJuan} XP\n`;
+            resumen += `${nombreP5}: ${xpInvitado} XP\n`;
+            resumen += `${nombreP6}: ${xpInvitado2} XP\n\n`;
+            resumen += `DINERO: ${dineroGanado} C-Bills\n`;
+            resumen += `GASTOS: ${gastos} C-Bills\n\n`;
+            resumen += '¿Confirmar?';
                 if (!confirm(resumen)) {
                 return;
             }
@@ -1502,6 +1697,8 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
                     xpJaime: xpJaime,
                     xpJoan: xpJoan,
                     xpJuan: xpJuan,
+                    xpInvitado: xpInvitado,
+                    xpInvitado2: xpInvitado2,
                     dineroGanado: dineroGanado,
                     gastos: gastos
                 });
@@ -2715,8 +2912,9 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
         }
 
         // NAVEGACIÓN BARRACONES
-        function goToBarracones() {
+function goToBarracones() {
             console.log('🎯 goToBarracones() llamada');
+            cargarPilotosDesdeConfiguracion();
                 // Poblar selectores de armas PRIMERO
             poblarSelectoresArmasBarracones();
                 // Intentar cargar datos del generador antes de ir a Barracones
@@ -2965,7 +3163,7 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
             }
 
             rellenarLevelSelects(); rellenarSelectoresCompra(); actualizarSlotsHabilidades(); changeCampaign(); updatePoints();
-            populateWeaponSelects();
+            poblarSelectoresArmasBarracones();
 
             document.getElementById('select-int').addEventListener('change', actualizarEstudios);
             document.getElementById('estudios-select').addEventListener('change', checkEstudios);
@@ -3793,7 +3991,20 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
         let currentScanMechIndex = 0;
         let nextScanMechIndex = 1;
         
-        function initMechScanSystem() {
+        async function fetchMechSvg(mechCode) {
+            const mechName = mechCode.split('-')[0];
+            const capitalizedName = mechName.charAt(0).toUpperCase() + mechName.slice(1);
+            try {
+                const response = await fetch('assets/mechs/' + capitalizedName + '.svg');
+                if (!response.ok) return null;
+                return await response.text();
+            } catch (e) {
+                console.error("Error fetching SVG:", e);
+                return null;
+            }
+        }
+        
+        async function initMechScanSystem() {
             const layerCurrent = document.getElementById('mech-layer-current');
             const layerNext = document.getElementById('mech-layer-next');
             const storage = document.getElementById('mech-svg-storage');
@@ -3801,35 +4012,27 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
             
             if (!layerCurrent || !layerNext || !storage) return;
             
-            // Al inicio: el mech visible completo es el que se muestra en el lateral
-            // currentScanMechIndex = 0 (Marauder visible, se va borrando)
-            // nextScanMechIndex = 1 (Warhammer apareciendo)
-            // El lateral muestra Marauder (el visible)
-            
-            // Cargar el primer mech en la capa actual (visible, se está borrando)
-            const currentSvgContainer = document.getElementById('mech-svg-' + SCAN_MECHS[currentScanMechIndex]);
-            if (currentSvgContainer) {
-                layerCurrent.innerHTML = currentSvgContainer.innerHTML;
+            const currentSvgText = await fetchMechSvg(SCAN_MECHS[currentScanMechIndex]);
+            if (currentSvgText) {
+                layerCurrent.innerHTML = currentSvgText;
                 const currentSvg = layerCurrent.querySelector('svg');
                 if (currentSvg) {
                     currentSvg.style.animation = 'mech-erase 12s linear forwards';
                 }
             }
             
-            // Cargar el siguiente mech en la capa next (apareciendo)
-            const nextSvgContainer = document.getElementById('mech-svg-' + SCAN_MECHS[nextScanMechIndex]);
-            if (nextSvgContainer) {
-                layerNext.innerHTML = nextSvgContainer.innerHTML;
+            const nextSvgText = await fetchMechSvg(SCAN_MECHS[nextScanMechIndex]);
+            if (nextSvgText) {
+                layerNext.innerHTML = nextSvgText;
                 const nextSvg = layerNext.querySelector('svg');
                 if (nextSvg) {
                     nextSvg.style.animation = 'mech-reveal 12s linear forwards';
                 }
             }
             
-            // El lateral muestra el mech que se está DIBUJANDO (nextScanMechIndex)
             currentMechIndex = nextScanMechIndex;
             updateSidebarMech();
-            updateBlueprintSilhouette();
+            await updateBlueprintSilhouette();
             
             // Iniciar animación del láser
             if (laser) {
@@ -3840,7 +4043,7 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
             setInterval(rotateScanMechs, 12000);
         }
         
-        function rotateScanMechs() {
+        async function rotateScanMechs() {
             const layerCurrent = document.getElementById('mech-layer-current');
             const layerNext = document.getElementById('mech-layer-next');
             const landingPage = document.getElementById('landing-page');
@@ -3858,9 +4061,9 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
             layerCurrent.innerHTML = layerNext.innerHTML;
             
             // Cargar el nuevo mech en "next" (se va a dibujar)
-            const nextSvgContainer = document.getElementById('mech-svg-' + SCAN_MECHS[nextScanMechIndex]);
-            if (nextSvgContainer) {
-                layerNext.innerHTML = nextSvgContainer.innerHTML;
+            const nextSvgText = await fetchMechSvg(SCAN_MECHS[nextScanMechIndex]);
+            if (nextSvgText) {
+                layerNext.innerHTML = nextSvgText;
             }
             
             // Reiniciar animaciones de SVGs
@@ -3913,32 +4116,29 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
         }
         
         // Actualizar la silueta del blueprint lateral
-        function updateBlueprintSilhouette() {
-            const marauderSvg = document.getElementById('mech-svg-marauder');
-            const warhammerSvg = document.getElementById('mech-svg-warhammer');
-            const battlemasterSvg = document.getElementById('mech-svg-battlemaster');
-            const locustSvg = document.getElementById('mech-svg-locust');
-            const waspSvg = document.getElementById('mech-svg-wasp');
+        async function updateBlueprintSilhouette() {
+            const blueprintContainer = document.querySelector('.mech-blueprint');
+            if (!blueprintContainer) return;
             
-            if (marauderSvg && warhammerSvg && battlemasterSvg && locustSvg && waspSvg) {
-                // Ocultar todos
-                marauderSvg.style.display = 'none';
-                warhammerSvg.style.display = 'none';
-                battlemasterSvg.style.display = 'none';
-                locustSvg.style.display = 'none';
-                waspSvg.style.display = 'none';
-                
-                // Mostrar el correspondiente
-                if (currentMechIndex === 0) {
-                    marauderSvg.style.display = 'block';
-                } else if (currentMechIndex === 1) {
-                    warhammerSvg.style.display = 'block';
-                } else if (currentMechIndex === 2) {
-                    battlemasterSvg.style.display = 'block';
-                } else if (currentMechIndex === 3) {
-                    locustSvg.style.display = 'block';
-                } else if (currentMechIndex === 4) {
-                    waspSvg.style.display = 'block';
+            // We know currentMechIndex corresponds to ICONIC_MECHS.
+            // Let's use it to fetch the appropriate SVG.
+            // 0: Marauder, 1: Warhammer, 2: Battlemaster, 3: Locust, 4: Wasp
+            const svgMap = ['marauder', 'warhammer', 'battlemaster', 'locust', 'wasp'];
+            const mechCode = svgMap[currentMechIndex];
+            if (mechCode) {
+                const svgText = await fetchMechSvg(mechCode + '-scan');
+                if (svgText) {
+                    blueprintContainer.innerHTML = svgText;
+                    const loadedSvg = blueprintContainer.querySelector('svg');
+                    if (loadedSvg) {
+                        loadedSvg.style.width = '100%';
+                        loadedSvg.style.height = '100%';
+                        loadedSvg.querySelectorAll('path, polygon, rect').forEach(el => {
+                            el.style.fill = 'none';
+                            el.style.stroke = '#00ff41';
+                            el.style.strokeWidth = '2';
+                        });
+                    }
                 }
             }
         }
@@ -3947,6 +4147,18 @@ document.getElementById('btn-registrar-mision').onclick = registrarMisionConGast
             init();
             initMechScanSystem();
         };
+
+        function recalcularFilaManual(inputElement) {
+            const row = inputElement.closest('tr');
+            const levelValue = parseInt(inputElement.value) || 0;
+            const attrCell = row.querySelector('.skill-attr-col');
+            const rollCell = row.querySelector('.skill-roll-col');
+                const attrValue = parseInt(attrCell.innerText) || 0;
+            rollCell.innerText = attrValue - levelValue;
+        }
+
+
+        
 
         // --- CRÍTICOS DE VEHÍCULOS ---
         const VEHICLE_CRITICALS = {
@@ -5729,11 +5941,13 @@ async function cargarConfiguracion() {
             document.getElementById('config-prompt-instrucciones').value = data.config['PROMPT_INSTRUCCIONES'] || '';
             
             // Pilotos
-            for (let i = 1; i <= 4; i++) {
+            for (const i of PILOTOS_CONFIGURACION) {
                 document.getElementById(`config-piloto${i}-nombre`).value = data.config[`PILOTO_${i}_NOMBRE`] || '';
                 document.getElementById(`config-piloto${i}-rango`).value = data.config[`PILOTO_${i}_RANGO`] || '';
                 document.getElementById(`config-piloto${i}-mech`).value = data.config[`PILOTO_${i}_MECH`] || '';
+                document.getElementById(`config-piloto${i}-foto`).value = data.config[`PILOTO_${i}_FOTO`] || '';
             }
+            cargarPilotosDesdeConfiguracion(true);
             
             console.log('⚙️ Configuración cargada desde Sheets');
         }
@@ -5755,15 +5969,27 @@ async function guardarConfiguracionCronicas() {
         'PILOTO_1_NOMBRE': document.getElementById('config-piloto1-nombre').value,
         'PILOTO_1_RANGO': document.getElementById('config-piloto1-rango').value,
         'PILOTO_1_MECH': document.getElementById('config-piloto1-mech').value,
+        'PILOTO_1_FOTO': document.getElementById('config-piloto1-foto').value,
         'PILOTO_2_NOMBRE': document.getElementById('config-piloto2-nombre').value,
         'PILOTO_2_RANGO': document.getElementById('config-piloto2-rango').value,
         'PILOTO_2_MECH': document.getElementById('config-piloto2-mech').value,
+        'PILOTO_2_FOTO': document.getElementById('config-piloto2-foto').value,
         'PILOTO_3_NOMBRE': document.getElementById('config-piloto3-nombre').value,
         'PILOTO_3_RANGO': document.getElementById('config-piloto3-rango').value,
         'PILOTO_3_MECH': document.getElementById('config-piloto3-mech').value,
+        'PILOTO_3_FOTO': document.getElementById('config-piloto3-foto').value,
         'PILOTO_4_NOMBRE': document.getElementById('config-piloto4-nombre').value,
         'PILOTO_4_RANGO': document.getElementById('config-piloto4-rango').value,
-        'PILOTO_4_MECH': document.getElementById('config-piloto4-mech').value
+        'PILOTO_4_MECH': document.getElementById('config-piloto4-mech').value,
+        'PILOTO_4_FOTO': document.getElementById('config-piloto4-foto').value,
+        'PILOTO_5_NOMBRE': document.getElementById('config-piloto5-nombre').value,
+        'PILOTO_5_RANGO': document.getElementById('config-piloto5-rango').value,
+        'PILOTO_5_MECH': document.getElementById('config-piloto5-mech').value,
+        'PILOTO_5_FOTO': document.getElementById('config-piloto5-foto').value,
+        'PILOTO_6_NOMBRE': document.getElementById('config-piloto6-nombre').value,
+        'PILOTO_6_RANGO': document.getElementById('config-piloto6-rango').value,
+        'PILOTO_6_MECH': document.getElementById('config-piloto6-mech').value,
+        'PILOTO_6_FOTO': document.getElementById('config-piloto6-foto').value
     };
     
     try {
@@ -5778,6 +6004,7 @@ async function guardarConfiguracionCronicas() {
         if (data.result === 'success') {
             alert('✅ Configuración guardada en Google Sheets');
             configCargada = {...configCargada, ...config};
+            cargarPilotosDesdeConfiguracion(true);
             
             // Sincronizar año en portada y panel Database
             const year = config['AÑO_CAMPANA'];
@@ -5948,7 +6175,9 @@ const JUGADORES_COLORES = {
     'Marcos': '#ffae00',
     'Jaime': '#4a9eff',
     'Joan': '#00ff41',
-    'Juan': '#f44336'
+    'Juan': '#f44336',
+    'Invitado': '#9e9e9e',
+    'Invitado 2': '#bdbdbd'
 };
 
 async function cargarLogros() {
@@ -5972,7 +6201,7 @@ async function cargarLogros() {
 
 function renderLogros(logros) {
     const container = document.getElementById('logros-container');
-    const jugadores = ['Marcos', 'Jaime', 'Joan', 'Juan'];
+    const jugadores = PILOTOS_UNIDAD;
     
     let html = '';
     
@@ -6243,7 +6472,8 @@ const PLAYER_NAMES = {
     2: 'Jaime', 
     3: 'Joan',
     4: 'Juan Palacios',
-    5: 'Invitado'
+    5: 'Invitado',
+    6: 'Invitado 2'
 };
 
 let btState = {
@@ -8614,7 +8844,7 @@ function irARegistroCombate() {
     
     if (px > 0 && window.combatCurrentCharacter?.jugador) {
         const jug = window.combatCurrentCharacter.jugador.toLowerCase();
-        let id = jug.includes('marcos') ? 'xp-marcos' : jug.includes('jaime') ? 'xp-jaime' : jug.includes('joan') ? 'xp-joan' : jug.includes('juan') ? 'xp-juan' : null;
+        let id = getXpInputIdFromJugador(jug);
         if (id) setTimeout(() => {
             const inp = document.getElementById(id);
             if (inp) { inp.value = (parseInt(inp.value) || 0) + px; inp.style.boxShadow = '0 0 20px rgba(74, 222, 128, 0.8)'; setTimeout(() => { inp.style.boxShadow = ''; }, 2000); }
@@ -9410,4 +9640,12 @@ function switchCalcTab(tab){
 }
 
 // switchMechTab removed — single view layout
+
+
+
+
+
+
+
+
 
